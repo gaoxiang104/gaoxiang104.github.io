@@ -8,3 +8,5 @@ yarn.lock
 .vscode/
 .deploy_git/
 public/
+db.json
+themes/next
