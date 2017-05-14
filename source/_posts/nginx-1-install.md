@@ -1,5 +1,5 @@
 ---
-title: nginx学习——安装
+title: nginx学习(1)——安装
 date: 2017-05-12 16:14:25
 tags: nginx
 categories: nginx
