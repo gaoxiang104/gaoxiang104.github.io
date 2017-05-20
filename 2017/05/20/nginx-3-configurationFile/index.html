@@ -1,0 +1,795 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nginx," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 配置文件在哪？ NGINX Plus is similar to other services in that it has a text-based configuration file written in a particular format. By default the file is named nginx.conf and placed in the /etc/nginx d">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx学习(3)——配置文件管理">
+<meta property="og:url" content="http://blog.xgo.pub/2017/05/20/nginx-3-configurationFile/index.html">
+<meta property="og:site_name" content="XGo">
+<meta property="og:description" content="1. 配置文件在哪？ NGINX Plus is similar to other services in that it has a text-based configuration file written in a particular format. By default the file is named nginx.conf and placed in the /etc/nginx d">
+<meta property="og:updated_time" content="2017-05-20T16:41:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx学习(3)——配置文件管理">
+<meta name="twitter:description" content="1. 配置文件在哪？ NGINX Plus is similar to other services in that it has a text-based configuration file written in a particular format. By default the file is named nginx.conf and placed in the /etc/nginx d">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.xgo.pub/2017/05/20/nginx-3-configurationFile/"/>
+
+
+
+
+
+  <title>nginx学习(3)——配置文件管理 | XGo</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XGo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.xgo.pub/2017/05/20/nginx-3-configurationFile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XGo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XGo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nginx学习(3)——配置文件管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T22:45:47+08:00">
+                2017-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-配置文件在哪？"><a href="#1-配置文件在哪？" class="headerlink" title="1. 配置文件在哪？"></a>1. 配置文件在哪？</h1><blockquote>
+<p>NGINX Plus is similar to other services in that it has a text-based configuration file written in a particular format. By default the file is named <code>nginx.conf</code> and placed in the <code>/etc/nginx</code> directory.</p>
+</blockquote>
+<p>NGINX Plus与其他服务类似，因为它具有以特定格式编写的基于文本的配置文件。默认情况下，文件名为<code>nginx.conf</code>并放在<code>/etc/nginx</code>目录中。(对于开源NGINX产品，所述位置取决于用于安装NGINX和操作系统程序包的系统。我的系统是<code>ubuntu</code>，<code>nginx.conf</code>所在目录是：<code>/etc/nginx</code>)</p>
+<h1 id="2-配置文件结构"><a href="#2-配置文件结构" class="headerlink" title="2. 配置文件结构"></a>2. 配置文件结构</h1><blockquote>
+<p>The configuration file consists of directives and their parameters. Simple (single-line) directives each end with a semicolon. Other directives act as “containers” that group together related directives, enclosing them in curly braces ( {} ). Here are some examples of simple directives.</p>
+</blockquote>
+<p>配置文件由指令及其参数组成。简单（单行）指令各自以分号(<strong><code>;</code></strong>)结尾。其他指令作为“容器”，将相关指令组合在一起，将其包围在花括号（  <strong><code>{}</code></strong> ）中。以下是简单指令的一些示例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">user             nobody;</div><div class="line">error_log        logs/error.log notice;</div><div class="line">worker_processes 1;</div></pre></td></tr></table></figure>
+<h1 id="3-引用子配置文件"><a href="#3-引用子配置文件" class="headerlink" title="3. 引用子配置文件"></a>3. 引用子配置文件</h1><p>为了使配置更易于维护，可以将一组特定功能的配置文件存储在<code>/etc/nginx/conf.d</code>目录中，并使用<strong><code>include</code></strong>指令将引入<code>nginx.conf</code>文件中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">include conf.d/http;</div><div class="line">include conf.d/stream;</div><div class="line">include conf.d/exchange-enhanced;</div></pre></td></tr></table></figure></p>
+<h1 id="4-traffic配置"><a href="#4-traffic配置" class="headerlink" title="4. traffic配置"></a>4. traffic配置</h1><blockquote>
+<p>A few top-level directives, referred to as contexts, group together the directives that apply to different traffic types:</p>
+</blockquote>
+<p>一些顶级指令，称为上下文，将适用于不同traffic类型的指令组合在一起：</p>
+<ul>
+<li><a href="http://nginx.org/en/docs/ngx_core_module.html?&amp;_ga=2.113298951.1021376016.1495291438-295886557.1494425840#events" target="_blank" rel="external">events</a> – General connection processing</li>
+<li><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html?&amp;_ga=2.113298951.1021376016.1495291438-295886557.1494425840#http" target="_blank" rel="external">http</a> – HTTP traffic</li>
+<li><a href="http://nginx.org/en/docs/mail/ngx_mail_core_module.html?&amp;_ga=2.113298951.1021376016.1495291438-295886557.1494425840#mail" target="_blank" rel="external">mail</a> – Mail traffic</li>
+<li><a href="http://nginx.org/en/docs/stream/ngx_stream_core_module.html?&amp;_ga=2.51118249.1021376016.1495291438-295886557.1494425840#stream" target="_blank" rel="external">stream</a> – TCP traffic</li>
+</ul>
+<blockquote>
+<p>In each of the traffic-handling contexts, you include one or more server contexts to define virtual servers that control the processing of requests. The directives you can include within a server context vary depending on the traffic type.</p>
+</blockquote>
+<p>在每一个traffic-handling上下文中，包括一个或多个<strong>server</strong>上下文来定义控制和处理虚拟服务的请求。根据不同的traffic在<strong>server</strong>上下文中设置相应指令。</p>
+<blockquote>
+<p>For HTTP traffic (the http context), each server directive controls the processing of requests for resources at particular domains or IP addresses. One or more location contexts in a server context define how to process specific sets of URIs.</p>
+</blockquote>
+<p>对于HTTP流量（http上下文），每个<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html?&amp;_ga=2.84503961.1021376016.1495291438-295886557.1494425840#server" target="_blank" rel="external">server</a>指令控制对特定域名或IP地址上的资源请求的处理。<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html?&amp;_ga=2.80406039.1021376016.1495291438-295886557.1494425840#location" target="_blank" rel="external">location</a>上下文中的一个或多个上下文server定义了如何处理特定的URI集合。</p>
+<blockquote>
+<p>For mail and TCP traffic (the mail and stream contexts) the server directives each control the processing of traffic arriving at a particular TCP port or UNIX socket.</p>
+</blockquote>
+<p>对于邮件和TCP流量（<a href="http://nginx.org/en/docs/mail/ngx_mail_core_module.html?_ga=2.84840217.1286160084.1495291441-295886557.1494425840" target="_blank" rel="external">mail</a>和<a href="http://nginx.org/en/docs/stream/ngx_stream_core_module.html?_ga=2.84840217.1286160084.1495291441-295886557.1494425840" target="_blank" rel="external">stream</a>上下文），server伪指令各自控制到达特定TCP端口或UNIX套接字的流量处理。</p>
+<p>以下配置说明了上下文的使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">user nobody; # a directive in the &apos;main&apos; context</div><div class="line"></div><div class="line">events &#123;</div><div class="line">    # configuration of connection processing</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line"></div><div class="line">    # Configuration specific to HTTP and affecting all virtual servers</div><div class="line"></div><div class="line">    server &#123;</div><div class="line">        # configuration of HTTP virtual server 1</div><div class="line"></div><div class="line">        location /one &#123;</div><div class="line">            # configuration for processing URIs with &apos;/one&apos;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        location /two &#123;</div><div class="line">            # configuration for processing URIs with &apos;/two&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    server &#123;</div><div class="line">        # configuration of HTTP virtual server 2</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">stream &#123;</div><div class="line">    # Configuration specific to TCP and affecting all virtual servers</div><div class="line"></div><div class="line">    server &#123;</div><div class="line">        # configuration of TCP virtual server 1 </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>For most directives, a context that is defined inside another context (a child context) inherits the values of directives included at the parent level. To override a value inherited from the parent, include the directive in the child context. For more information on context inheritence, see the documentation for the <a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html?&amp;_ga=2.9808053.1286160084.1495291441-295886557.1494425840#proxy_set_header" target="_blank" rel="external">proxy_set_header</a> directive.</p>
+</blockquote>
+<p>对于大多数指令，在另一个上下文（子上下文）中定义的上下文将继承父级中包含的伪指令的值。要覆盖从父进程继承的值，请在子上下文中包含该指令。有关上下文遗留的更多信息，请参阅指令的<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html?&amp;_ga=2.9808053.1286160084.1495291441-295886557.1494425840#proxy_set_header" target="_blank" rel="external">proxy_set_header</a>文档。</p>
+<h1 id="5-生效修改的配置"><a href="#5-生效修改的配置" class="headerlink" title="5. 生效修改的配置"></a>5. 生效修改的配置</h1><p>要使更改修改过后的配置文件生效，Nginx必须重新加载文件。方式有两种：</p>
+<ul>
+<li><p>reload方式（推荐使用）</p>
+<p>  使用reload signal来生效修改后的配置，而不会中断当前请求的处理。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># nginx -s reload</div></pre></td></tr></table></figure>
+</li>
+<li><p>重启Nginx</p>
+<p>  步骤：</p>
+<ul>
+<li><p>关闭Nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># nginx -s stop</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动Nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># nginx -c /etc/nginx/nginx.conf</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-参考文献"><a href="#6-参考文献" class="headerlink" title="6. 参考文献"></a>6. 参考文献</h1><p><a href="https://www.nginx.com/resources/admin-guide/configuration-files/" target="_blank" rel="external">CREATING NGINX PLUS CONFIGURATION FILES</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/13/nginx-2-beginnerGuide/" rel="next" title="nginx学习(2)——进程和运行时控制">
+                <i class="fa fa-chevron-left"></i> nginx学习(2)——进程和运行时控制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/tx.jpg"
+               alt="XGo" />
+          <p class="site-author-name" itemprop="name">XGo</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gaoxiang104" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/advancedfly" target="_blank" title="微薄">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微薄
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-配置文件在哪？"><span class="nav-text">1. 配置文件在哪？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-配置文件结构"><span class="nav-text">2. 配置文件结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-引用子配置文件"><span class="nav-text">3. 引用子配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-traffic配置"><span class="nav-text">4. traffic配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-生效修改的配置"><span class="nav-text">5. 生效修改的配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-参考文献"><span class="nav-text">6. 参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XGo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
