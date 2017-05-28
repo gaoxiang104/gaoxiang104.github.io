@@ -260,6 +260,621 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.xgo.pub/2017/05/27/coreJava-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XGo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XGo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/27/coreJava-4/" itemprop="url">CoreJava学习(4)——String类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T13:07:51+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CoreJava/" itemprop="url" rel="index">
+                    <span itemprop="name">CoreJava</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-String类的两种实例化方式"><a href="#1-String类的两种实例化方式" class="headerlink" title="1.String类的两种实例化方式"></a>1.String类的两种实例化方式</h1><p>直接赋值：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringDemo01</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        String name = <span class="string">"Foo"</span>;</div><div class="line">        System.out.println(<span class="string">"name:"</span> + name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过关键字new<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringDemo2</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        String name = <span class="keyword">new</span> String(<span class="string">"Foo"</span>);</div><div class="line">        System.out.println(<span class="string">"name:"</span> + name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="2-String的两种比较操作"><a href="#2-String的两种比较操作" class="headerlink" title="2.String的两种比较操作"></a>2.String的两种比较操作</h1><p>使用“==”进行比较:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringDemo3</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        String str1 = <span class="string">"hello"</span>;  <span class="comment">// 直接赋值</span></div><div class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);  <span class="comment">// 通过new赋值</span></div><div class="line">        String str3 = str2; <span class="comment">// 传递引用</span></div><div class="line">        System.out.println(<span class="string">"str1 == str2 --&gt; "</span> + (str1==str2)); <span class="comment">// false</span></div><div class="line">        System.out.println(<span class="string">"str1 == str3 --&gt; "</span> + (str1==str3)); <span class="comment">// false</span></div><div class="line">        System.out.println(<span class="string">"str2 == str3 --&gt; "</span> + (str2==str3)); <span class="comment">// true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面进行内存的分析：</p>
+<p><img src="/assets/images/coreJava-4/1.jpg" alt=""></p>
+<p>使用”==”进行比较，实际是判断地址空间是否相等，判断的是地址值。</p>
+<h2 id="2-1-String比较：equals"><a href="#2-1-String比较：equals" class="headerlink" title="2.1.String比较：equals()"></a>2.1.String比较：equals()</h2><p>如果要判断两个String的内容是否相等，则必须使用String类中提供的equals()方法完成。代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringDemo4</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        String str1 = <span class="string">"hello"</span>;  <span class="comment">// 直接赋值</span></div><div class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);  <span class="comment">// 通过new赋值</span></div><div class="line">        String str3 = str2; <span class="comment">// 传递引用</span></div><div class="line">        System.out.println(<span class="string">"str1 equals str2 --&gt; "</span> + (str1.equals(str2))); <span class="comment">// true</span></div><div class="line">        System.out.println(<span class="string">"str1 equals str3 --&gt; "</span> + (str1.equals(str3))); <span class="comment">// true</span></div><div class="line">        System.out.println(<span class="string">"str2 equals str3 --&gt; "</span> + (str2.equals(str3))); <span class="comment">// true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>结论：String的两种比较方式：</strong></p>
+<ul>
+<li>一种是使用“==”，比较的是地址值</li>
+<li>另一种是使用“equals()”方法，比较的是具体的内容</li>
+</ul>
+<h1 id="3-两种实例化方式的区别"><a href="#3-两种实例化方式的区别" class="headerlink" title="3.两种实例化方式的区别"></a>3.两种实例化方式的区别</h1><p>在String中可以使用直接赋值和new调用构造方法的方式完成，那么该使用那种更合适呢？</p>
+<h2 id="3-1-一个字符串就是String的匿名对象"><a href="#3-1-一个字符串就是String的匿名对象" class="headerlink" title="3.1.一个字符串就是String的匿名对象"></a>3.1.一个字符串就是String的匿名对象</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringDemo5</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// 直接赋值的字符串"hello" 可以调用equals()方法</span></div><div class="line">        <span class="comment">// 说明一个字符串就是一个String的匿名对象</span></div><div class="line">        System.out.println(<span class="string">"hello"</span>.equals(<span class="string">"hello"</span>));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.xgo.pub/2017/05/26/coreJava-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XGo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XGo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/26/coreJava-3/" itemprop="url">CoreJava学习(3)——构造方法与匿名对象</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-26T15:08:02+08:00">
+                2017-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CoreJava/" itemprop="url" rel="index">
+                    <span itemprop="name">CoreJava</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="构造方法的概念及调用时机"><a href="#构造方法的概念及调用时机" class="headerlink" title="构造方法的概念及调用时机"></a>构造方法的概念及调用时机</h1><p>构造方法的定义格式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> 类名称 </span>&#123;</div><div class="line">    访问权限 类名称 (类型<span class="number">1</span> 参数<span class="number">1</span>,类型<span class="number">2</span> 参数<span class="number">2</span>,...)&#123;</div><div class="line">        ... <span class="comment">// 构造方法没有返回值</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>在构造方法的声明中需要注意以下几点：</strong></p>
+<ul>
+<li>构造方法的名称必须与类名一致</li>
+<li>构造方法的声明处不能有任何返回值类型的声明</li>
+<li>不能在构造方法中使用return返回值</li>
+</ul>
+<h2 id="调用时机"><a href="#调用时机" class="headerlink" title="调用时机"></a>调用时机</h2><p>java中实例化对象时调用构造方法。<br>测试代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"create a Person object"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConstructorDemo</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"声明对象"</span>);</div><div class="line">        Person per = <span class="keyword">null</span>;</div><div class="line">        System.out.println(<span class="string">"实例化对象"</span>);</div><div class="line">        per = <span class="keyword">new</span> Person();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">声明对象</div><div class="line">实例化对象</div><div class="line">create a Person object</div></pre></td></tr></table></figure></p>
+<h2 id="默认的无参构造"><a href="#默认的无参构造" class="headerlink" title="默认的无参构造"></a>默认的无参构造</h2><p><strong>注意：</strong></p>
+<ul>
+<li>每个类中肯定都会有一个构造方法。</li>
+<li>如果一个类中没有声明一个明确的构造方法，则会自动生存一个无参的什么都不做的构造方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="构造方法的重载"><a href="#构造方法的重载" class="headerlink" title="构造方法的重载"></a>构造方法的重载</h1><p>构造方法的重载过程与普通方法一样：<strong><code>参数的类型或个数不同</code></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.setName(name);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name,<span class="keyword">int</span> age)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.setName(name);</div><div class="line">        <span class="keyword">this</span>.setAge(age);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="匿名对象的使用"><a href="#匿名对象的使用" class="headerlink" title="匿名对象的使用"></a>匿名对象的使用</h1><p>在Java中如果一个对象只使用一次，则就可以将其定义成匿名对象。<br>匿名对象只开辟了堆内存。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tell</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"tell()"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConstructorDemo</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Person().tell();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.xgo.pub/2017/05/26/coreJava-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XGo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XGo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/26/coreJava-2/" itemprop="url">CoreJava学习(2)——Java的封装性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-26T14:05:26+08:00">
+                2017-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CoreJava/" itemprop="url" rel="index">
+                    <span itemprop="name">CoreJava</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="为什么要有封装"><a href="#为什么要有封装" class="headerlink" title="为什么要有封装"></a>为什么要有封装</h1><ul>
+<li>封装就是保护内容。</li>
+<li>保证某些属性或方法可以不被外部看见。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    String name;	</div><div class="line">    <span class="keyword">int</span> age;	</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tell</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"姓名："</span> + name + <span class="string">"，年龄："</span> + age);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EncDemo01</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Person per = <span class="keyword">new</span> Person();</div><div class="line">        per.name = <span class="string">"Foo"</span>;</div><div class="line">        per.age = -<span class="number">30</span>;	</div><div class="line">        <span class="comment">// 将age设置为-30,语法上没有错误，但是从实际的角度看，是错误的。</span></div><div class="line">        per.tell();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上的代码，语法上没有问题，但是从实际的角度看，以上的代码绝对不符合要求。<br>不合适的根本原因在与此处让属性可以直接被外部访问。</p>
+<h1 id="实现封装"><a href="#实现封装" class="headerlink" title="实现封装"></a>实现封装</h1><p> 将类中的属性设置为私有权限（<strong><code>private</code></strong>）,使得外部无法直接调用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="getter-和setter-方法"><a href="#getter-和setter-方法" class="headerlink" title="getter()和setter()方法"></a>getter()和setter()方法</h2><p>因为这些属性肯定是要表示一些实际的意义，那么这些有意义的内容肯定应该由外部设定，所以在java中对于封装性的访问就给出了一个明确的原则，此原则必须遵守。</p>
+<p>被封装的属性如果需要被访问，则需要编写setter及getter方法完成。</p>
+<p>例如：现在有一个属性，private String name;</p>
+<ul>
+<li>Setter（设置）：public void setName(String name);</li>
+<li>Getter（取得）：public String getName();</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="number">0</span>&gt;=age &amp;&amp; <span class="number">150</span> &lt;= <span class="number">150</span> )&#123;	<span class="comment">//加入验证</span></div><div class="line">            <span class="keyword">this</span>.age = age;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            System.out.println(<span class="string">"Illegal age field"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tell</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"姓名："</span> + name + <span class="string">"，年龄："</span> + age);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.xgo.pub/2017/05/26/coreJava-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XGo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XGo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/26/coreJava-1/" itemprop="url">CoreJava学习(1)——面向对象、类与对象</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-26T09:28:02+08:00">
+                2017-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CoreJava/" itemprop="url" rel="index">
+                    <span itemprop="name">CoreJava</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="面向对象的三大特征"><a href="#面向对象的三大特征" class="headerlink" title="面向对象的三大特征"></a>面向对象的三大特征</h1><ul>
+<li>封装(Encapsulation)<ul>
+<li>对外部不可见。可以保护程序中的某些内容。</li>
+</ul>
+</li>
+<li>继承(Inheritance)<ul>
+<li>扩展类的功能</li>
+</ul>
+</li>
+<li>多态(Polymorphism)<ul>
+<li>方法的重栽</li>
+<li>对象的多态性</li>
+</ul>
+</li>
+</ul>
+<h1 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h1><p>　　类是对某一类事物的描述，是抽象的、概念上的定义；对象是实际存在的该类事物的每个个体，因而也称实例(Instance);</p>
+<h1 id="类的定义与对象的创建"><a href="#类的定义与对象的创建" class="headerlink" title="类的定义与对象的创建"></a>类的定义与对象的创建</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 声明类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	<span class="comment">// 类中有两个属性</span></div><div class="line">	String name;</div><div class="line">	<span class="keyword">int</span> age;</div><div class="line"></div><div class="line">	<span class="comment">// 无参构造器</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 带参构造器</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 类中的方法</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tell</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"姓名:"</span> + name + <span class="string">",年龄:"</span> + age);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassDemo01</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">// 声明对象，并使用`new`实例化对象</span></div><div class="line">		Person person = <span class="keyword">new</span> Person(<span class="string">"Foo"</span>, <span class="number">11</span>);</div><div class="line">		person.tell();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Java中对象内存划分"><a href="#Java中对象内存划分" class="headerlink" title="Java中对象内存划分"></a>Java中对象内存划分</h1><p>类属于引用传递类型，引用数据类型必然存在栈内存-堆内存的引用关系。</p>
+<h2 id="内存划分：对象创建之初"><a href="#内存划分：对象创建之初" class="headerlink" title="内存划分：对象创建之初"></a>内存划分：对象创建之初</h2><p><img src="/assets/images/coreJava-1/1.jpg" alt=""></p>
+<ul>
+<li>声明对象：Person per,栈内存中声明的，只开辟了栈内存的对象是无法使用的，必须有其堆内存的引用才可以使用。</li>
+<li>实例化对象：new Person()，在堆中开辟空间，所有的内容都是默认值。<ul>
+<li>String：是一个字符串，本身是一个类，就是一个引用数据类型，则此时默认值就是null。</li>
+<li>int：是一个整数，本身是一个数，所以是基本数据类型，则此时的默认值是0。</li>
+</ul>
+</li>
+</ul>
+<h2 id="内存操作：为属性赋值"><a href="#内存操作：为属性赋值" class="headerlink" title="内存操作：为属性赋值"></a>内存操作：为属性赋值</h2><p><img src="/assets/images/coreJava-1/2.jpg" alt=""></p>
+<p>对象是保存在栈内存之中，属性是保存在堆内存之中。</p>
+<h2 id="内存操作：声明并创建多个对象"><a href="#内存操作：声明并创建多个对象" class="headerlink" title="内存操作：声明并创建多个对象"></a>内存操作：声明并创建多个对象</h2><p><img src="/assets/images/coreJava-1/3.jpg" alt=""></p>
+<h2 id="内存操作：声明两个对象，并指向同一个堆内存"><a href="#内存操作：声明两个对象，并指向同一个堆内存" class="headerlink" title="内存操作：声明两个对象，并指向同一个堆内存"></a>内存操作：声明两个对象，并指向同一个堆内存</h2><p><img src="/assets/images/coreJava-1/4.jpg" alt=""></p>
+<p>所谓的引用数据类型，实际上传递的就是堆内存的使用权，可以同时为一个堆内存空间定义多个栈内存的引用。</p>
+<h2 id="垃圾产生的内存关系"><a href="#垃圾产生的内存关系" class="headerlink" title="垃圾产生的内存关系"></a>垃圾产生的内存关系</h2><p><img src="/assets/images/coreJava-1/5.jpg" alt=""></p>
+<p>因为per2改变了指向，所以其原本的内存空间就没有任何栈的引用，则这样的内存就被称为垃圾，等待这垃圾收集机制进行回收。</p>
+<p><strong><code>GC</code></strong>：垃圾收集机制的简称。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://blog.xgo.pub/2017/05/20/nginx-3-configurationFile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -551,8 +1166,8 @@
 <p>The worker processes do the actual processing of requests. NGINX relies on OS-dependent mechanisms to efficiently distribute requests among worker processes. The number of worker processes is defined in the nginx.conf configuration file and can be fixed for a given configuration or automatically adjusted to the number of available CPU cores (see <a href="http://nginx.org/en/docs/ngx_core_module.html#worker_processes" target="_blank" rel="external">worker_processes</a>).</p>
 </blockquote>
 <p>工作进程处理真实的请求。NGINX依赖于依赖于操作系统的机制来有效地在工作进程之间分配请求。工作进程的数量在nginx.conf配置文件中定义，并且可以针对给定的配置进行修复，或者自动调整为可用CPU内核的数量（参见 <a href="http://nginx.org/en/docs/ngx_core_module.html#worker_processes" target="_blank" rel="external">worker_processes</a>）。</p>
-<h1 id="2-nginx控制"><a href="#2-nginx控制" class="headerlink" title="2. nginx控制"></a>2. nginx控制</h1><p>首先查看<code>nginx</code>命令的<code>help</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> nginx -h </span></div><div class="line">nginx version: nginx/1.12.0</div><div class="line">Usage: nginx [-?hvVtTq] [-s signal] [-c filename] [-p prefix] [-g directives]</div><div class="line"></div><div class="line">Options:</div><div class="line">  -?,-h         : this help</div><div class="line">  -v            : show version and exit</div><div class="line">  -V            : show version and configure options then exit</div><div class="line">  -t            : test configuration and exit</div><div class="line">  -T            : test configuration, dump it and exit</div><div class="line">  -q            : suppress non-error messages during configuration testing</div><div class="line">  -s signal     : send signal to a master process: stop, quit, reopen, reload</div><div class="line">  -p prefix     : set prefix path (default: /etc/nginx/)</div><div class="line">  -c filename   : set configuration file (default: /etc/nginx/nginx.conf)</div><div class="line">  -g directives : set global directives out of configuration file</div></pre></td></tr></table></figure></p>
-<h2 id="2-1-启动nginx"><a href="#2-1-启动nginx" class="headerlink" title="2.1. 启动nginx"></a>2.1. 启动nginx</h2><p>启动方式如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> nginx -c /etc/nginx/nginx.conf</span></div></pre></td></tr></table></figure></p>
+<h1 id="2-nginx控制"><a href="#2-nginx控制" class="headerlink" title="2. nginx控制"></a>2. nginx控制</h1><p>首先查看<code>nginx</code>命令的<code>help</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> nginx -h </div><div class="line">nginx version: nginx/1.12.0</div><div class="line">Usage: nginx [-?hvVtTq] [-s signal] [-c filename] [-p prefix] [-g directives]</div><div class="line"></div><div class="line">Options:</div><div class="line">  -?,-h         : this help</div><div class="line">  -v            : show version and exit</div><div class="line">  -V            : show version and configure options then exit</div><div class="line">  -t            : test configuration and exit</div><div class="line">  -T            : test configuration, dump it and exit</div><div class="line">  -q            : suppress non-error messages during configuration testing</div><div class="line">  -s signal     : send signal to a master process: stop, quit, reopen, reload</div><div class="line">  -p prefix     : set prefix path (default: /etc/nginx/)</div><div class="line">  -c filename   : set configuration file (default: /etc/nginx/nginx.conf)</div><div class="line">  -g directives : set global directives out of configuration file</div></pre></td></tr></table></figure></p>
+<h2 id="2-1-启动nginx"><a href="#2-1-启动nginx" class="headerlink" title="2.1. 启动nginx"></a>2.1. 启动nginx</h2><p>启动方式如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> nginx -c /etc/nginx/nginx.conf</div></pre></td></tr></table></figure></p>
 <p><em>备注：网上找的启动方式，看help并不明白 nginx -c 就是start</em></p>
 <h2 id="2-2-nginx-s"><a href="#2-2-nginx-s" class="headerlink" title="2.2. nginx -s"></a>2.2. nginx -s</h2><p>通过<code>nginx -s signal</code>来控制主进程，下面是<code>signal</code>的详细解释：</p>
 <ul>
@@ -569,7 +1184,7 @@
 <p>Once the master process receives the signal to reload configuration, it checks the syntax validity of the new configuration file and tries to apply the configuration provided in it. If this is a success, the master process starts new worker processes and sends messages to old worker processes, requesting them to shut down. Otherwise, the master process rolls back the changes and continues to work with the old configuration. Old worker processes, receiving a command to shut down, stop accepting new connections and continue to service current requests until all such requests are serviced. After that, the old worker processes exit.</p>
 </blockquote>
 <p>一旦主进程收到要重新加载配置的命令，它将检查新配置文件的语法有效性，并尝试应用其中提供的配置。如果这是成功的，主进程将启动新的工作进程，并向旧的工作进程发送消息，请求它们关闭。否则，主进程回滚更改，并继续使用旧配置。老工作进程，接收关闭命令，停止接受新连接，并继续维护当前请求，直到所有这些请求得到维护。之后，旧的工作进程退出。</p>
-<h2 id="2-3-查看nginx进程列表"><a href="#2-3-查看nginx进程列表" class="headerlink" title="2.3. 查看nginx进程列表"></a>2.3. 查看nginx进程列表</h2><p>获取正在运行的nginx进程列表，可以使用下面的命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> ps -ax | grep nginx</span></div><div class="line"> 9345 ?        Ss     0:00 nginx: master process nginx -c /etc/nginx/nginx.conf</div><div class="line"> 9358 ?        S      0:00 nginx: worker process</div><div class="line">11734 pts/18   S+     0:00 grep --color=auto nginx</div></pre></td></tr></table></figure></p>
+<h2 id="2-3-查看nginx进程列表"><a href="#2-3-查看nginx进程列表" class="headerlink" title="2.3. 查看nginx进程列表"></a>2.3. 查看nginx进程列表</h2><p>获取正在运行的nginx进程列表，可以使用下面的命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> ps -ax | grep nginx</div><div class="line"> 9345 ?        Ss     0:00 nginx: master process nginx -c /etc/nginx/nginx.conf</div><div class="line"> 9358 ?        S      0:00 nginx: worker process</div><div class="line">11734 pts/18   S+     0:00 grep --color=auto nginx</div></pre></td></tr></table></figure></p>
 <p>可以使用<code>kill nginx master process</code>正常关闭nginx :<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">keill -s QUIT 9345</div></pre></td></tr></table></figure></p>
 <h1 id="3-配置文件结构介绍"><a href="#3-配置文件结构介绍" class="headerlink" title="3. 配置文件结构介绍"></a>3. 配置文件结构介绍</h1><blockquote>
 <p>The way nginx and its modules work is determined in the configuration file. By default, the configuration file is named <code>nginx.conf</code> and placed in the directory <code>/usr/local/nginx/conf</code>, <code>/etc/nginx</code>, or <code>/usr/local/etc/nginx</code>.</p>
@@ -750,7 +1365,7 @@
 <h2 id="2-2-添加apt-sources"><a href="#2-2-添加apt-sources" class="headerlink" title="2.2. 添加apt sources"></a>2.2. 添加apt sources</h2><p>将以下内容追加到文件<code>/etc/apt/sources.list</code>末尾：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">deb http://nginx.org/packages/ubuntu/ xenial nginx</div><div class="line">deb-src http://nginx.org/packages/ubuntu/ xenial nginx</div></pre></td></tr></table></figure></p>
 <h2 id="2-3-下载并导入nginx-signing-key"><a href="#2-3-下载并导入nginx-signing-key" class="headerlink" title="2.3. 下载并导入nginx signing key"></a>2.3. 下载并导入<strong>nginx signing key</strong></h2><p>RPM软件包和Debian / Ubuntu存储库都使用数字签名来验证下载包的完整性和起源。为了检查签名，需要下载 <a href="http://nginx.org/keys/nginx_signing.key" target="_blank" rel="external">nginx签名密钥</a> 并将其导入rpm或apt 程序的密钥环：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-key add /%密钥所在文件夹%/nginx_signing.key</div></pre></td></tr></table></figure></p>
 <h2 id="2-4-执行安装"><a href="#2-4-执行安装" class="headerlink" title="2.4. 执行安装"></a>2.4. 执行安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install nginx</div></pre></td></tr></table></figure>
-<h2 id="2-5-安装完成"><a href="#2-5-安装完成" class="headerlink" title="2.5. 安装完成"></a>2.5. 安装完成</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> nginx -h</span></div><div class="line">nginx version: nginx/1.12.0</div><div class="line">Usage: nginx [-?hvVtTq] [-s signal] [-c filename] [-p prefix] [-g directives]</div><div class="line"></div><div class="line">Options:</div><div class="line">  -?,-h         : this help</div><div class="line">  -v            : show version and exit</div><div class="line">  -V            : show version and configure options then exit</div><div class="line">  -t            : test configuration and exit</div><div class="line">  -T            : test configuration, dump it and exit</div><div class="line">  -q            : suppress non-error messages during configuration testing</div><div class="line">  -s signal     : send signal to a master process: stop, quit, reopen, reload</div><div class="line">  -p prefix     : set prefix path (default: /etc/nginx/)</div><div class="line">  -c filename   : set configuration file (default: /etc/nginx/nginx.conf)</div><div class="line">  -g directives : set global directives out of configuration file</div></pre></td></tr></table></figure>
+<h2 id="2-5-安装完成"><a href="#2-5-安装完成" class="headerlink" title="2.5. 安装完成"></a>2.5. 安装完成</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> nginx -h</div><div class="line">nginx version: nginx/1.12.0</div><div class="line">Usage: nginx [-?hvVtTq] [-s signal] [-c filename] [-p prefix] [-g directives]</div><div class="line"></div><div class="line">Options:</div><div class="line">  -?,-h         : this help</div><div class="line">  -v            : show version and exit</div><div class="line">  -V            : show version and configure options then exit</div><div class="line">  -t            : test configuration and exit</div><div class="line">  -T            : test configuration, dump it and exit</div><div class="line">  -q            : suppress non-error messages during configuration testing</div><div class="line">  -s signal     : send signal to a master process: stop, quit, reopen, reload</div><div class="line">  -p prefix     : set prefix path (default: /etc/nginx/)</div><div class="line">  -c filename   : set configuration file (default: /etc/nginx/nginx.conf)</div><div class="line">  -g directives : set global directives out of configuration file</div></pre></td></tr></table></figure>
 <h1 id="3-参考文档"><a href="#3-参考文档" class="headerlink" title="3. 参考文档"></a>3. 参考文档</h1><blockquote>
 <p>nginx documentation：<a href="http://nginx.org/en/linux_packages.html" target="_blank" rel="external">Installing nginx</a></p>
 </blockquote>
@@ -953,7 +1568,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -964,7 +1579,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -975,7 +1590,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
