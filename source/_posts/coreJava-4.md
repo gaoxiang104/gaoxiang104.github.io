@@ -83,3 +83,11 @@ public class StringDemo5 {
 }
 ```
 
+直接赋值的字符串"hello" 可以调用equals()方法。 说明一个字符串就是一个String的匿名对象。
+
+## String类两种实例化方式的区别——直接赋值
+
+
+
+## String类两种实例化方式的区别——通过关键字new赋值
+
