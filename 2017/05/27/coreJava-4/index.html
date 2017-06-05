@@ -98,7 +98,10 @@
 <meta property="og:site_name" content="XGo">
 <meta property="og:description" content="1.String类的两种实例化方式直接赋值：123456public class StringDemo01 &amp;#123;    public static void main(String[] args) &amp;#123;        String name = &quot;Foo&quot;;        System.out.println(&quot;name:&quot; + name);    &amp;#125;&amp;#125; 通过关">
 <meta property="og:image" content="http://blog.xgo.pub/assets/images/coreJava-4/1.jpg">
-<meta property="og:updated_time" content="2017-06-05T11:37:00.042Z">
+<meta property="og:image" content="http://blog.xgo.pub/assets/images/coreJava-4/2.jpg">
+<meta property="og:image" content="http://blog.xgo.pub/assets/images/coreJava-4/3.jpg">
+<meta property="og:image" content="http://blog.xgo.pub/assets/images/coreJava-4/4.jpg">
+<meta property="og:updated_time" content="2017-06-05T16:05:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CoreJava学习(4)——String类">
 <meta name="twitter:description" content="1.String类的两种实例化方式直接赋值：123456public class StringDemo01 &amp;#123;    public static void main(String[] args) &amp;#123;        String name = &quot;Foo&quot;;        System.out.println(&quot;name:&quot; + name);    &amp;#125;&amp;#125; 通过关">
@@ -375,7 +378,12 @@
 <h1 id="3-两种实例化方式的区别"><a href="#3-两种实例化方式的区别" class="headerlink" title="3.两种实例化方式的区别"></a>3.两种实例化方式的区别</h1><p>在String中可以使用直接赋值和new调用构造方法的方式完成，那么该使用那种更合适呢？</p>
 <h2 id="3-1-一个字符串就是String的匿名对象"><a href="#3-1-一个字符串就是String的匿名对象" class="headerlink" title="3.1.一个字符串就是String的匿名对象"></a>3.1.一个字符串就是String的匿名对象</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringDemo5</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// 直接赋值的字符串"hello" 可以调用equals()方法</span></div><div class="line">        <span class="comment">// 说明一个字符串就是一个String的匿名对象</span></div><div class="line">        System.out.println(<span class="string">"hello"</span>.equals(<span class="string">"hello"</span>));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>直接赋值的字符串”hello” 可以调用equals()方法。 说明一个字符串就是一个String的匿名对象。</p>
-<h2 id="String类两种实例化方式的区别——直接赋值"><a href="#String类两种实例化方式的区别——直接赋值" class="headerlink" title="String类两种实例化方式的区别——直接赋值"></a>String类两种实例化方式的区别——直接赋值</h2><h2 id="String类两种实例化方式的区别——通过关键字new赋值"><a href="#String类两种实例化方式的区别——通过关键字new赋值" class="headerlink" title="String类两种实例化方式的区别——通过关键字new赋值"></a>String类两种实例化方式的区别——通过关键字new赋值</h2>
+<h2 id="3-2-String类两种实例化方式的区别——直接赋值"><a href="#3-2-String类两种实例化方式的区别——直接赋值" class="headerlink" title="3.2.String类两种实例化方式的区别——直接赋值"></a>3.2.String类两种实例化方式的区别——直接赋值</h2><p><img src="/assets/images/coreJava-4/2.jpg" alt=""></p>
+<h2 id="3-3-String类两种实例化方式的区别——通过关键字new赋值"><a href="#3-3-String类两种实例化方式的区别——通过关键字new赋值" class="headerlink" title="3.3.String类两种实例化方式的区别——通过关键字new赋值"></a>3.3.String类两种实例化方式的区别——通过关键字new赋值</h2><p><img src="/assets/images/coreJava-4/3.jpg" alt=""></p>
+<p>使用直接赋值的方式只需要一个实例化对象即可，而使用new String()的方式则要开辟两个内存对象。<br>开发中最好使用直接赋值的方式完成。</p>
+<h1 id="4-字符串的内容不可改变"><a href="#4-字符串的内容不可改变" class="headerlink" title="4.字符串的内容不可改变"></a>4.字符串的内容不可改变</h1><p><img src="/assets/images/coreJava-4/4.jpg" alt=""></p>
+<p>实际上字符串内容的改变，改变的是内存地址的应用关系。</p>
+
       
     </div>
 
@@ -580,7 +588,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-String类的两种实例化方式"><span class="nav-text">1.String类的两种实例化方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-String的两种比较操作"><span class="nav-text">2.String的两种比较操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-String比较：equals"><span class="nav-text">2.1.String比较：equals()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-两种实例化方式的区别"><span class="nav-text">3.两种实例化方式的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-一个字符串就是String的匿名对象"><span class="nav-text">3.1.一个字符串就是String的匿名对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类两种实例化方式的区别——直接赋值"><span class="nav-text">String类两种实例化方式的区别——直接赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类两种实例化方式的区别——通过关键字new赋值"><span class="nav-text">String类两种实例化方式的区别——通过关键字new赋值</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-String类的两种实例化方式"><span class="nav-text">1.String类的两种实例化方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-String的两种比较操作"><span class="nav-text">2.String的两种比较操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-String比较：equals"><span class="nav-text">2.1.String比较：equals()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-两种实例化方式的区别"><span class="nav-text">3.两种实例化方式的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-一个字符串就是String的匿名对象"><span class="nav-text">3.1.一个字符串就是String的匿名对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-String类两种实例化方式的区别——直接赋值"><span class="nav-text">3.2.String类两种实例化方式的区别——直接赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-String类两种实例化方式的区别——通过关键字new赋值"><span class="nav-text">3.3.String类两种实例化方式的区别——通过关键字new赋值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-字符串的内容不可改变"><span class="nav-text">4.字符串的内容不可改变</span></a></li></ol></div>
             
 
           </div>
