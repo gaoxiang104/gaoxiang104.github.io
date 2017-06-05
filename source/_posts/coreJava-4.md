@@ -85,9 +85,17 @@ public class StringDemo5 {
 
 直接赋值的字符串"hello" 可以调用equals()方法。 说明一个字符串就是一个String的匿名对象。
 
-## String类两种实例化方式的区别——直接赋值
+## 3.2.String类两种实例化方式的区别——直接赋值
+![](/assets/images/coreJava-4/2.jpg)
 
 
+## 3.3.String类两种实例化方式的区别——通过关键字new赋值
+![](/assets/images/coreJava-4/3.jpg)
 
-## String类两种实例化方式的区别——通过关键字new赋值
+使用直接赋值的方式只需要一个实例化对象即可，而使用new String()的方式则要开辟两个内存对象。
+开发中最好使用直接赋值的方式完成。
 
+# 4.字符串的内容不可改变
+![](/assets/images/coreJava-4/4.jpg)
+
+实际上字符串内容的改变，改变的是内存地址的应用关系。
