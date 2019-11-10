@@ -18,6 +18,8 @@ redis版本：Redis 3.2.9 is the latest stable version;
 # wget http://download.redis.io/releases/redis-3.2.9.tar.gz
 ```
 
+<!-- more -->
+
 ## 1.2.解压
 ```linux
 # tar -zxvf redis-3.2.9.tar.gz 
