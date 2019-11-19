@@ -7,7 +7,7 @@ title: XGo
 subtitle:
 description:
 author: XGo
-language: zh-Hans
+language: zh-CN
 timezone:
 
 # URL
@@ -63,7 +63,15 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+# theme: landscape
+theme: xgo
+
+# sass
+node_sass:
+  debug: false
+  outputStyle: nested
+  precision: 5
+  sourceComments: false
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

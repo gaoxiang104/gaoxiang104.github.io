@@ -1,0 +1,24 @@
+body {
+  background: #f0eef5;
+}
+
+section {
+  width: 1200px;
+  margin: 20px auto 0;
+}
+
+.mainContent {
+    float: left;
+    width: 890px;
+    // text-overflow: ellipsis;
+    // border:1px solid rosybrown;
+    min-height: 100px;
+}
+
+.sidebar{
+    float: left;
+    width: 290px;
+    margin-left: 20px;
+    // border:1px solid rosybrown;
+    min-height: 100px;
+}

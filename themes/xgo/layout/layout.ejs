@@ -1,0 +1,22 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<%- include("_partial/head.ejs") %>
+
+<body>
+    <!-- 头部 -->
+    <%- include("_partial/header.ejs", null, {cache: !config.relative_link}) %>
+
+    <section>
+        <div class='mainContent'>
+            <!-- 主体 -->
+            <%- body %>
+        </div>
+        <!-- 右侧菜单：分类、标签 -->
+        <div class='sidebar'>
+            <%- include("_partial/sidebar.ejs", null, {cache: !config.relative_link}) %>
+        </div>
+    </section>
+</body>
+
+</html>

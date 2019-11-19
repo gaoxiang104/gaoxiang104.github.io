@@ -1,0 +1,21 @@
+<head>
+    <meta charset="utf-8">
+
+    <%
+    let title= page.title;
+
+    // 检查当前页面是否为存档页面
+    if(is_archive()){
+
+    }
+    %>
+
+    <!-- title：文字名称 | config.title -->
+    <title>
+        <% if(title){%> <%= title %> | <%}%><%= config.title %>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 分享资源 -->
+    <%- open_graph({twitter_id:theme.twitter}) %>
+    <%- css(['css/base.css', 'css/layout.css', 'css/header.css', 'css/index.css']) %>
+</head>

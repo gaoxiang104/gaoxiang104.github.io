@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.navigator {
+  height: 60px;
+  background-color: #169fe6;
+  clear: both;
+  position: relative;
+  border: 1px solid #138cca;
+  border-left: none;
+  border-right: none;
+}
+.navList {
+  width: 1200px;
+  margin: 0 auto;
+  height: 60px;
+}
+
+.navList li{
+    float: left;
+    height: 60px;
+    line-height: 60px;
+    list-style-type: none;
+}
+
+.navList li a{
+    display: block;
+    height: 60px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #fff;
+    text-shadow: 2px 2px 2px #333;
+}
+
+.navList li a:hover {
+    background-color: #fff;
+    color: #169fe6;
+}
