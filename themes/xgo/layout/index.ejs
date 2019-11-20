@@ -1,3 +1,28 @@
 <h1>
     这是index.ejs
 </h1>
+<ul>
+    <% page.posts.each((post)=>{ %>
+    <li class="index-li-post">
+        <p class="index-post-head">
+            <span class="index-post-day"><a href="<%- url_for(post.path) %>"><%- date(post.date, config.date_format) %></a></span>
+            <span class="index-post-title"><a href="<%- url_for(post.path) %>"><%- post.title %></a></span>
+        </p>
+        <p class="index-post-excerpt">
+            <%- truncate(strip_html(post.content), {length: theme.auto_excerpt.length, omission: '...'}) %>
+        </p>
+        <p class="index-post-foot">
+            <!-- 查看更多 -->
+            <span class="read-more"><a href="<%- url_for(post.path) %>"><%= theme.excerpt_link %></a></span>
+        </p>
+    </li>
+    <% }) %>
+</ul>
+
+<nav id="page-nav1">
+    <% var prev_text = "< " + __('prev');var next_text = __('next') + " >"%>
+    <%- paginator({
+      prev_text: prev_text,
+      next_text: next_text
+    }) %>
+</nav>
